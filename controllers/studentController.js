@@ -35,3 +35,24 @@ exports.getAllStudents = async (req, res) => {
     });
   }
 };
+
+exports.deleteStudent = async (req, res) => {
+    try {
+        const studentId = req.params.id;
+        const student = await studentModel.findByIdAndDelete(studentId);
+        if (!student) {
+            return res.status(404).json({
+                message: 'Student not found'
+            });
+        }
+        res.status(200).json({
+            message: 'Student deleted successfully',
+            data: student
+        });
+    } catch (error) {
+        res.status(500).json({
+            status: 'internal server error' + error.message,
+            error: error.message
+        });
+    }
+}
