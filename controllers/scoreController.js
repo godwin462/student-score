@@ -21,7 +21,7 @@ exports.createScore = async (req, res) => {
     await student.save();
 
     res.status(201).json({
-      mesasge: "score Score created successfully",
+      mesasge: "Score created successfully",
       data: score,
     });
   } catch (error) {
@@ -29,5 +29,21 @@ exports.createScore = async (req, res) => {
       mesasge: `Internal server error`,
       error: error.message,
     });
+  }
+};
+
+exports.deleteScore = async (req, res)=> {
+  try {
+    const scoreId = req.params._id
+    const score = await scoreModel.findByIdAndDelete(scoreId);
+     res.status(200).json({
+            message: 'Score deleted successfully',
+            data: student
+        });
+  } catch (error) {
+    res.status(500).json({
+      message:`Internet server error`,
+      error: error.mesasge
+    })
   }
 };
