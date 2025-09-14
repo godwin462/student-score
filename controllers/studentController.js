@@ -34,4 +34,27 @@ exports.getAllStudents = async (req, res) => {
       error: error.message,
     });
   }
-};
+}
+exports.getOne = async (req,res) => {
+    try {
+        const{id}= req.params
+        const student = await studentModel.findById(id) 
+        if (!student) {
+          return res.status(404).json({
+            message:`student not found`,
+        
+          })
+        }
+        
+        res.status(200).json({
+            message:`getting one student is successfully`,
+            data:student
+        })
+    } catch (error) {
+        res.status(500).json({
+            message:`internal server Error`,
+            error:error.message
+        })
+    }
+    
+}
