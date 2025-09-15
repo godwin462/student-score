@@ -8,7 +8,7 @@ const {
 const studentRouter = require("express").Router();
 studentRouter.post("/", createstudent);
 studentRouter.get("/", getAllStudents);
-studentRouter.delete("/", deleteStudent);
+studentRouter.delete("/:id", deleteStudent);
 studentRouter.get("/:id", getOne);
 
 module.exports = studentRouter;
